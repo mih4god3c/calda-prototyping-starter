@@ -1,0 +1,72 @@
+---
+description: No-backend contract — all data is mocked, always active
+alwaysApply: true
+---
+
+# No Backend Contract
+
+This is a **prototyping-only** repository. There is no real backend. Everything must be mocked.
+
+## Absolute Prohibitions
+- Never call real external APIs or third-party services
+- Never use `process.env` for API keys, tokens, or secrets
+- Never write Next.js Route Handlers (`src/app/api/`) that make real network requests
+- Never install or use HTTP client libraries (axios, got, ky) for real calls
+- Never use `fetch()` to call external URLs
+- Never connect to databases (Supabase, Prisma, MongoDB, etc.)
+- Never implement real authentication flows
+
+## How to Handle Data
+All data must come from `src/lib/mock-data/`. All async operations must use `mockFetch()`:
+
+```typescript
+import { mockFetch } from "@/lib/mock-api";
+import { mockUsers } from "@/lib/mock-data/users";
+
+// Good — simulated async with realistic delay
+const users = await mockFetch(mockUsers, 600);
+
+// Bad — real API call
+const users = await fetch("https://api.example.com/users").then(r => r.json());
+```
+
+## How to Document Real Integrations
+When a feature would need a real backend, add a `// BACKEND:` comment block immediately above the mock:
+
+```typescript
+// BACKEND: GET /api/users/{id}
+// Request:  Path param: id (UUID)
+// Response: { id: string, name: string, email: string, avatarUrl: string, role: UserRole }
+// Auth:     Bearer token (JWT) in Authorization header
+// Notes:    Returns 404 if user not found; 403 if requesting other user's data without admin role
+const user = await mockFetch(mockUsers[0], 400);
+```
+
+The `// BACKEND:` block must include:
+- HTTP method and path
+- Request shape (params, body, headers)
+- Response shape
+- Auth requirements
+- Notable error cases or business rules
+
+## Mock Delays
+Use realistic delays that mirror what the real API would feel like:
+- Authentication: 600–1000ms
+- List/feed data: 400–800ms
+- Single item fetch: 200–500ms
+- Form submission: 800–1500ms
+- File upload: 1000–3000ms (simulate with longer delay)
+
+## Authentication Mocking
+Never implement real auth. Instead:
+1. Create a mock user in `src/lib/mock-data/users.ts`
+2. Store "logged in" state in React Context or `useState`
+3. Use the mock user's data everywhere — no JWT, no cookies, no sessions
+4. Show login/signup screens visually but wire the submit button to set local state
+
+## Third-Party Service Mocking
+For integrations like payment, maps, analytics, notifications:
+- Show the UI as if the service is integrated
+- Add the `// BACKEND:` comment explaining the real integration
+- Use `mockFetch()` with a realistic delay for the happy-path response
+- Show both success and error states in the prototype

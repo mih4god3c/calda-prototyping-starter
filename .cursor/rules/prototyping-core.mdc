@@ -1,0 +1,51 @@
+---
+description: Core prototyping conventions for CALDA prototypes — always active
+alwaysApply: true
+---
+
+# Core Prototyping Rules
+
+## Component Library
+- Always use shadcn/ui primitives from `src/components/ui/`
+- Never write raw `<button>`, `<input>`, `<select>` — use the shadcn equivalents
+- If a needed component isn't installed, add it: `npx shadcn@latest add <name>`
+- Shared prototype chrome goes in `src/components/prototype/` (nav, frames, shells)
+
+## Styling
+- Use Tailwind utility classes exclusively — no `style={{}}` inline styles
+- Never write custom CSS unless updating CSS variables in `globals.css`
+- Colors, font sizes, and spacing must use Tailwind scale values
+- Respect the CSS variable tokens from shadcn (`--primary`, `--background`, etc.)
+- After applying branding, always update the CSS variables in `globals.css`
+
+## File & Route Structure
+- Every new screen lives at `src/app/(screens)/[screen-name]/page.tsx`
+- After creating any new screen, register it in `src/app/page.tsx` prototype index
+- Co-locate screen-specific components next to their `page.tsx` (not in global components)
+- Only truly shared components go in `src/components/prototype/`
+
+## TypeScript
+- Every component must have typed props — use `interface` for prop definitions
+- Use `type` for union types and utility types
+- Export types that are used across files from `src/lib/types.ts`
+- Never use `any` — use `unknown` + type guards if the shape is uncertain
+
+## State Management
+- Use React `useState` and `useContext` only — no Zustand, Redux, or similar
+- For shared state across screens, use React Context with a provider in `layout.tsx`
+- Keep state as local as possible (closest component that needs it)
+
+## Code Readability (designers read this code)
+- Keep components under 150 lines — extract sub-components freely
+- Use descriptive variable names, not abbreviations
+- Add a one-line comment above any non-obvious logic
+- Group JSX with blank lines between logical sections
+
+## Images and Assets
+- Use `/public/` for static assets used in prototypes
+- For placeholder images, use `https://picsum.photos/{width}/{height}` or `https://api.dicebear.com/` for avatars
+- Brand logos go in `branding/logos/` and should be copied to `public/` when used
+
+## Prototype Index
+- `src/app/page.tsx` is the visual dashboard — always keep it updated
+- Each screen entry must include: name, description, route, and which device frame it uses

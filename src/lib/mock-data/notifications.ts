@@ -1,0 +1,58 @@
+import type { Notification } from "@/lib/types";
+
+export const mockNotifications: Notification[] = [
+  {
+    id: "notif-001",
+    type: "message",
+    title: "New message from Jordan",
+    body: "Hey, can you take a look at the latest designs when you get a chance?",
+    isRead: false,
+    createdAt: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+    avatarUrl: "https://api.dicebear.com/9.x/avataaars/svg?seed=jordan",
+    actionUrl: "/(screens)/messages",
+  },
+  {
+    id: "notif-002",
+    type: "mention",
+    title: "Sam mentioned you",
+    body: "@alex great work on the onboarding flow! The animations are smooth.",
+    isRead: false,
+    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    avatarUrl: "https://api.dicebear.com/9.x/avataaars/svg?seed=sam",
+  },
+  {
+    id: "notif-003",
+    type: "success",
+    title: "Payment received",
+    body: "Your invoice #INV-2024-089 has been paid. $1,200.00 is on its way.",
+    isRead: false,
+    createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: "notif-004",
+    type: "update",
+    title: "New feature available",
+    body: "Batch export is now live. Export up to 500 items at once from any list.",
+    isRead: true,
+    createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+    actionUrl: "/(screens)/settings",
+  },
+  {
+    id: "notif-005",
+    type: "follow",
+    title: "Taylor Kim joined your workspace",
+    body: "Taylor accepted your invitation and joined the team.",
+    isRead: true,
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    avatarUrl: "https://api.dicebear.com/9.x/avataaars/svg?seed=taylor",
+  },
+  {
+    id: "notif-006",
+    type: "alert",
+    title: "Storage almost full",
+    body: "You've used 87% of your storage. Upgrade your plan to avoid interruptions.",
+    isRead: true,
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    actionUrl: "/(screens)/settings",
+  },
+];
