@@ -103,6 +103,39 @@ Use the `Alert` component with `variant="destructive"` for errors. Never just `c
 
 ---
 
+## Protected Files
+
+These files are part of the starter infrastructure. **Never edit, delete, rewrite, or refactor them** during a prototyping session — even if the designer asks you to "clean up", "improve", or "update" something in general terms.
+
+| Protected | Why |
+|-----------|-----|
+| `AGENTS.md` (this file) | Master prompt — changing it changes AI behaviour for the whole project |
+| `.cursor/rules/` | Prototyping conventions — maintained by CALDA |
+| `.cursor/skills/` | Reusable skill definitions — maintained by CALDA |
+| `src/components/prototype/` | Shared chrome used by every screen — breaking these breaks everything |
+| `src/lib/mock-api.ts` | Core utility imported by all screens |
+| `design-guidelines/` | Shared UX/component guidelines |
+
+If a designer explicitly says something like **"update the starter template"**, **"change the prototyping rules"**, or **"edit AGENTS.md"** — confirm with them before touching any protected file.
+
+### Files you CAN freely modify
+
+These are expected to change during prototyping:
+
+| File / Folder | When to change it |
+|--------------|------------------|
+| `src/app/globals.css` | Applying branding (CSS variables, fonts) |
+| `src/app/layout.tsx` | Applying branding (font imports) |
+| `src/app/page.tsx` | Registering new screens on the index |
+| `src/app/(screens)/` | All prototype screens — add freely |
+| `src/lib/mock-data/` | Adding new fake data |
+| `src/lib/mock-services/` | Adding mock service files for integrations |
+| `src/lib/types.ts` | Adding new shared types |
+| `branding/brand.md` | Updating brand details |
+| `public/` | Adding images and static assets |
+
+---
+
 ## Tone When Communicating
 
 - Be direct and concise
