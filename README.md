@@ -188,6 +188,36 @@ These behaviours are built in — the AI uses them automatically when relevant:
 
 ---
 
+## Mobbin MCP (Optional but Recommended)
+
+This project is pre-configured to connect to [Mobbin](https://mobbin.com) — a library of 600,000+ real app screens from shipped products. When connected, the AI can search Mobbin for real examples before building your screens, so what it generates is grounded in proven patterns rather than generic guesses.
+
+### How to connect
+
+1. Open Cursor → **Settings → Tools & MCPs**
+2. Find **Mobbin** in the list (it's already configured) and click **Connect**
+3. A browser window opens — sign in with your Mobbin account to authorize
+4. Switch back to Cursor — it's ready
+
+> Requires a paid Mobbin account (Pro, Team, or Enterprise plan).
+
+### How to use it
+
+Just mention real app references in your prompts — the AI will call Mobbin automatically:
+
+```
+"Add an onboarding flow — search Mobbin for how top fintech apps handle this"
+"Build a checkout screen, reference what leading e-commerce apps do on Mobbin"
+"Show me how apps like Revolut handle KYC, then build that flow for us"
+"Find examples of empty states from productivity apps and use that pattern"
+```
+
+You can also search explicitly: **"Search Mobbin for [anything]"**
+
+When Mobbin is being used, you'll see a small tool call block appear in the AI's response showing `mobbin_quick_search` or `mobbin_get_app_screens`.
+
+---
+
 ## Tips for Better Prototypes
 
 - **Be descriptive.** Instead of "add a profile screen", try: "Add a mobile profile screen with an avatar, name, bio, and settings options for notifications, privacy, and help."
